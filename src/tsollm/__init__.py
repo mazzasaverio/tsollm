@@ -21,13 +21,13 @@ from .schemas import (
 )
 
 __all__ = [
-    "TSO",
-    "extract_note_info",
-    "extract_bookmark_info",
-    "NoteClassification",
     "BookmarkClassification",
-    "TSOError",
     "ConfigurationError",
     "ExtractionError",
+    "NoteClassification",
     "SchemaValidationError",
+    "TSO",
+    "TSOError",
+    "extract_bookmark_info",
+    "extract_note_info",
 ]
