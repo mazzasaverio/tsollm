@@ -1,18 +1,22 @@
 """Core functionality for TSO-LLM - Template Structured Output LLM."""
 
 import json
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional, Type, cast
+
 from openai import OpenAI
 from pydantic import BaseModel
 
-from .schemas import NoteClassification, BookmarkClassification
-from .exceptions import ExtractionError, ConfigurationError
+from .exceptions import ConfigurationError, ExtractionError
+from .schemas import BookmarkClassification, NoteClassification
 
 
 class TSO:
     """Main class for Template Structured Output using OpenAI LLMs."""
 
-    SUPPORTED_SCHEMAS = {"note": NoteClassification, "bookmark": BookmarkClassification}
+    SUPPORTED_SCHEMAS: Dict[str, Type[BaseModel]] = {
+        "note": NoteClassification,
+        "bookmark": BookmarkClassification,
+    }
 
     def __init__(
         self,
@@ -38,7 +42,7 @@ class TSO:
     def _prepare_schema_for_openai(self, schema: Dict[str, Any]) -> Dict[str, Any]:
         """Prepare schema for OpenAI Structured Outputs v2 compatibility."""
 
-        def process_schema(obj):
+        def process_schema(obj: Any) -> None:
             if isinstance(obj, dict):
                 # Ensure all objects have additionalProperties: false
                 if obj.get("type") == "object":
@@ -57,7 +61,7 @@ class TSO:
                     process_schema(item)
 
         # Deep copy and process
-        prepared_schema = json.loads(json.dumps(schema))
+        prepared_schema: Dict[str, Any] = json.loads(json.dumps(schema))
         process_schema(prepared_schema)
         return prepared_schema
 
@@ -116,7 +120,7 @@ class TSO:
                 raise ExtractionError("Empty response from OpenAI")
 
             # Parse JSON and validate with Pydantic
-            parsed_data = json.loads(content)
+            parsed_data: Dict[str, Any] = json.loads(content)
             validated_data = schema_class(**parsed_data)
 
             return validated_data.model_dump()
@@ -158,7 +162,7 @@ class TSO:
 
         return prompt
 
-    def get_supported_schemas(self) -> Dict[str, BaseModel]:
+    def get_supported_schemas(self) -> Dict[str, Type[BaseModel]]:
         """Get all supported schema types and their classes."""
         return self.SUPPORTED_SCHEMAS.copy()
 
@@ -175,7 +179,7 @@ class TSO:
             "schema": schema_class.model_json_schema(),
             "fields": {
                 name: {
-                    "type": field.annotation,
+                    "type": str(field.annotation),
                     "description": field.description,
                     "required": field.is_required(),
                 }

@@ -153,7 +153,7 @@ class TestBookmarkClassification:
         bookmark_data = {
             "title": "GitHub Homepage",
             "description": "GitHub main website",
-            "category": "homepage",
+            "category": "tool",
             "tags": ["git", "github"],
             "domain": "github.com",
             "language": "en",
