@@ -1,10 +1,12 @@
 """Tests for core functionality."""
 
-import pytest
 import json
 from unittest.mock import Mock, patch
+
+import pytest
+
 from tsollm.core import TSO, extract_note_info
-from tsollm.exceptions import ExtractionError, ConfigurationError
+from tsollm.exceptions import ConfigurationError, ExtractionError
 
 
 class TestTSO:

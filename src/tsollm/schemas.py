@@ -1,7 +1,8 @@
 """Structured output schemas for text extraction."""
 
 from typing import List, Literal, Union
-from pydantic import BaseModel, Field, ConfigDict
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class NoteClassification(BaseModel):

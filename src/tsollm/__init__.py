@@ -6,18 +6,18 @@ __email__ = "saverio3107@gmail.com"
 
 from .core import (
     TSO,
-    extract_note_info,
     extract_bookmark_info,
-)
-from .schemas import (
-    NoteClassification,
-    BookmarkClassification,
+    extract_note_info,
 )
 from .exceptions import (
-    TSOError,
     ConfigurationError,
     ExtractionError,
     SchemaValidationError,
+    TSOError,
+)
+from .schemas import (
+    BookmarkClassification,
+    NoteClassification,
 )
 
 __all__ = [

@@ -1,12 +1,13 @@
 """Core functionality for TSO-LLM - Template Structured Output LLM."""
 
 import json
-from typing import Dict, Any, Union, Optional
+from typing import Any, Dict, Optional, Union
+
 from openai import OpenAI
 from pydantic import BaseModel
 
-from .schemas import NoteClassification, BookmarkClassification
-from .exceptions import ExtractionError, ConfigurationError
+from .exceptions import ConfigurationError, ExtractionError
+from .schemas import BookmarkClassification, NoteClassification
 
 
 class TSO:

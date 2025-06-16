@@ -2,7 +2,8 @@
 
 import pytest
 from pydantic import ValidationError
-from tsollm.schemas import NoteClassification, BookmarkClassification
+
+from tsollm.schemas import BookmarkClassification, NoteClassification
 
 
 class TestNoteClassification:
