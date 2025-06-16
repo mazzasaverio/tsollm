@@ -6,7 +6,7 @@ Thank you for your interest in contributing to TSO-LLM! This document provides g
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.9 or higher
 - [UV](https://github.com/astral-sh/uv) package manager
 - Git
 - OpenAI API key for testing

@@ -5,7 +5,7 @@
 [![PyPI version](https://badge.fury.io/py/tsollm.svg)](https://badge.fury.io/py/tsollm)
 [![Tests](https://github.com/yourusername/tsollm/workflows/Tests/badge.svg)](https://github.com/yourusername/tsollm/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
 A powerful Python package providing predefined schemas for OpenAI's Structured Outputs. Get structured data from text using battle-tested templates - no schema design needed!
 
