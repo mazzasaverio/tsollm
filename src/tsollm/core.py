@@ -1,13 +1,12 @@
 """Core functionality for TSO-LLM - Template Structured Output LLM."""
 
 import json
-from typing import Any, Dict, Optional, Union
-
+from typing import Dict, Any, Optional
 from openai import OpenAI
 from pydantic import BaseModel
 
-from .exceptions import ConfigurationError, ExtractionError
-from .schemas import BookmarkClassification, NoteClassification
+from .schemas import NoteClassification, BookmarkClassification
+from .exceptions import ExtractionError, ConfigurationError
 
 
 class TSO:
@@ -135,14 +134,18 @@ class TSO:
             "note": (
                 "You are an expert at analyzing and classifying notes. "
                 "Extract structured information from the given note text, "
-                "identifying the category, priority, actionable items, and other relevant details. "
+                "identifying the category, priority, actionable items, "
+                "and other relevant details. "
                 "Be accurate and concise in your analysis."
             ),
             "bookmark": (
                 "You are an expert at analyzing web content and URLs. "
-                "Extract structured information to create a well-organized bookmark entry. "
-                "Analyze the content for its type, usefulness, category, and other relevant metadata. "
-                "If the input contains a URL, consider both the URL and any provided content description."
+                "Extract structured information to create a "
+                "well-organized bookmark entry. "
+                "Analyze the content for its type, usefulness, "
+                "category, and other relevant metadata. "
+                "If the input contains a URL, consider both the URL "
+                "and any provided content description."
             ),
         }
 

@@ -32,7 +32,7 @@ jobs:
       run: |
         uv run black --check src/ tests/
         uv run isort --check-only src/ tests/
-        uv run flake8 src/ tests/
+        uv run flake8 src/ tests/ --max-line-length=88 --extend-ignore=E203,W503
         uv run mypy src/
     
     - name: Run tests
