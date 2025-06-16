@@ -1,7 +1,7 @@
 """Core functionality for TSO-LLM - Template Structured Output LLM."""
 
 import json
-from typing import Any, Dict, Optional, Type, cast
+from typing import Any, Dict, Optional, Type
 
 from openai import OpenAI
 from pydantic import BaseModel
