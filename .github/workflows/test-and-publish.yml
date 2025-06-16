@@ -1,0 +1,98 @@
+name: Test & Publish
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+permissions:
+  contents: write
+  id-token: write  # Required for trusted publishing
+
+env:
+  UV_SYSTEM_PYTHON: 1
+
+jobs:
+  test-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "pyproject.toml"  # Usa pyproject.toml invece di uv.lock
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Run quality checks
+        run: |
+          uv run black --check src/ tests/
+          uv run isort --check-only src/ tests/
+          uv run flake8 src/ tests/ --max-line-length=88 --extend-ignore=E203,W503
+          uv run mypy src/
+
+      - name: Run tests
+        run: uv run pytest --cov=src/tsollm --cov-report=xml --cov-report=term-missing
+
+      - name: Get package version
+        id: version
+        run: |
+          VERSION=$(uv run python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+          echo "Package version: $VERSION"
+
+      - name: Check if version tag exists
+        id: tag_exists
+        run: |
+          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Tag v${{ steps.version.outputs.version }} already exists - skipping release"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "Tag v${{ steps.version.outputs.version }} does not exist - will create release"
+          fi
+
+      - name: Clean dist
+        if: steps.tag_exists.outputs.exists == 'false'
+        run: rm -rf dist/
+
+      - name: Build package
+        if: steps.tag_exists.outputs.exists == 'false'
+        run: uv build
+
+      - name: Publish to PyPI
+        if: steps.tag_exists.outputs.exists == 'false'
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Create and push tag
+        if: steps.tag_exists.outputs.exists == 'false'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag -a "${{ steps.version.outputs.tag }}" -m "Release ${{ steps.version.outputs.tag }}"
+          git push origin "${{ steps.version.outputs.tag }}"
+
+      - name: Create GitHub Release
+        if: steps.tag_exists.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: Release ${{ steps.version.outputs.tag }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+
+      - name: Prune uv cache
+        run: uv cache prune --ci 
