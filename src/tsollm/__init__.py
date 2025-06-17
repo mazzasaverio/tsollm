@@ -1,6 +1,6 @@
 """TSO-LLM - Template Structured Output for Large Language Models."""
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __author__ = "Saverio Mazza"
 __email__ = "saverio3107@gmail.com"
 
