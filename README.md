@@ -1,11 +1,11 @@
 # TSO-LLM
 
-**Template Structured Output for Large Language Models**
+**Templates Structured Output**
 
-[![PyPI version](https://badge.fury.io/py/tsollm.svg)](https://badge.fury.io/py/tsollm)
-[![Tests](https://github.com/yourusername/tsollm/workflows/Tests/badge.svg)](https://github.com/yourusername/tsollm/actions)
+[![PyPI Downloads](https://static.pepy.tech/badge/tsollm)](https://pepy.tech/projects/tsollm)
+[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
+[![PyPI Version](https://img.shields.io/pypi/v/tsollm)](https://pypi.org/project/tsollm/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
 Get structured data from text using predefined schemas and OpenAI's Structured Outputs. No schema design needed!
 
