@@ -2,7 +2,7 @@
 
 **Templates Structured Output**
 
-[![PyPI Downloads](https://static.pepy.tech/badge/tsollm)](https://pepy.tech/projects/tsollm)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/tsollm)](https://pypi.org/project/tsollm/)
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
 [![PyPI Version](https://img.shields.io/pypi/v/tsollm)](https://pypi.org/project/tsollm/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
