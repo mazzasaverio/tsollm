@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "tsollm"
-version = "0.1.1"
+version = "0.1.2"
 description = "Template Structured Output LLM - Predefined schemas for OpenAI Structured Outputs"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -52,10 +52,10 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/tsollm"
+Homepage = "https://github.com/mazzasaverio/tsollm"
 Documentation = "https://tsollm.readthedocs.io/"
-Repository = "https://github.com/yourusername/tsollm"
-Issues = "https://github.com/yourusername/tsollm/issues"
+Repository = "https://github.com/mazzasaverio/tsollm"
+Issues = "https://github.com/mazzasaverio/tsollm/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/tsollm"]
