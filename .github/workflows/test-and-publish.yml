@@ -7,7 +7,7 @@ on:
 
 permissions:
   contents: write
-  id-token: write  # Required for trusted publishing
+  id-token: write 
 
 env:
   UV_SYSTEM_PYTHON: 1
